@@ -26,7 +26,7 @@ button{
   background:#ff5fa2;
   color:white;
   cursor:pointer;
-  margin-top:20px;
+  margin:10px;
 }
 button:hover{background:#e83e8c;}
 button.disabled{
@@ -37,11 +37,6 @@ button.disabled{
   font-size:50px;
   cursor:pointer;
   margin:20px;
-}
-.lock{
-  font-size:40px;
-  color:#444;
-  margin-left:10px;
 }
 .teddy{
   font-size:90px;
@@ -167,16 +162,41 @@ function typeText(text, callback){
   type();
 }
 
-// Show letter with typing
+// Show letter with typing + back + next logic
 function showLetter(i){
   currentLetter = i;
   document.getElementById("lettersDiv").style.display="none";
   typeText(letters[i], ()=>{
-    let btn = document.createElement("button");
-    btn.innerText = "Back ⬅️";
-    btn.onclick = backToLetters;
+    let btnContainer = document.createElement("div");
+
+    // Back button for letters list
+    if(i < letters.length - 1){ // first 3 letters
+        let backBtn = document.createElement("button");
+        backBtn.innerText = "Back ⬅️";
+        backBtn.onclick = backToLetters;
+        btnContainer.appendChild(backBtn);
+
+        let nextBtn = document.createElement("button");
+        nextBtn.innerText = "Next ➡️";
+        nextBtn.onclick = ()=> showLetter(i+1); // next letter
+        btnContainer.appendChild(nextBtn);
+    } else { // last letter (4th)
+        let nextBtn = document.createElement("button");
+        nextBtn.innerText = "पुढे 💖"; // main question
+        nextBtn.onclick = ()=> {
+            document.getElementById("lettersSlide").style.display="none";
+            document.getElementById("mainQuestion").style.display="block";
+        };
+        btnContainer.appendChild(nextBtn);
+
+        let backBtn = document.createElement("button");
+        backBtn.innerText = "Back ⬅️";
+        backBtn.onclick = backToLetters;
+        btnContainer.appendChild(backBtn);
+    }
+
     contentDiv.appendChild(document.createElement("br"));
-    contentDiv.appendChild(btn);
+    contentDiv.appendChild(btnContainer);
   });
 }
 
