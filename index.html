@@ -2,6 +2,7 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>प्रिय साहिल 💖</title>
 <style>
 body{
@@ -11,16 +12,16 @@ body{
   background: linear-gradient(135deg,#ffe6f0,#fff);
   overflow-x:hidden;
 }
-h1{color:#d63384;}
-p{font-size:18px; line-height:1.6;}
+h1{color:#d63384; font-size:2em;}
+p{font-size:1.1em; line-height:1.6;}
 .centered-text{
-  margin:50px 20px;
-  font-size:20px;
-  line-height:1.8;
+  margin:40px 15px;
+  font-size:1.1em;
+  line-height:1.6;
 }
 button{
   padding:12px 24px;
-  font-size:18px;
+  font-size:1em;
   border:none;
   border-radius:30px;
   background:#ff5fa2;
@@ -38,17 +39,8 @@ button.disabled{
   cursor:pointer;
   margin:20px;
 }
-.teddy{
-  font-size:90px;
-  display:inline-block;
-  animation:bounce 1.5s infinite;
-}
-@keyframes bounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-}
 img{
-  max-width:80%;
+  max-width:90%;
   border-radius:20px;
   margin-top:20px;
   opacity:0;
@@ -118,7 +110,7 @@ img{
   <img id="finalPhoto" 
        src="https://drive.google.com/uc?export=view&id=1QGe_Q1Rf47yL3SH1egS06vn0A1axaONV" 
        alt="आपली Photo" 
-       style="opacity:0; transform:scale(0.8); transition:1.2s ease-in-out; max-width:80%; border-radius:20px; margin-top:20px;">
+       style="opacity:0; transform:scale(0.8); transition:1.2s ease-in-out; margin-top:20px;">
 </div>
 
 <div id="heartContainer"></div>
@@ -148,14 +140,14 @@ let contentDiv = document.getElementById("content");
 
 // Typing animation
 function typeText(text, callback){
-  contentDiv.innerHTML = "";
+  contentDiv.innerHTML = ""; // innerHTML ensures <br> works
   let i=0;
   function type(){
-    if(i<text.length){
+    if(i < text.length){
       contentDiv.innerHTML += text.charAt(i);
       i++;
       setTimeout(type,40);
-    }else{
+    } else {
       if(callback) callback();
     }
   }
@@ -169,8 +161,8 @@ function showLetter(i){
   typeText(letters[i], ()=>{
     let btnContainer = document.createElement("div");
 
-    // Back button for letters list
-    if(i < letters.length - 1){ // first 3 letters
+    // First 3 letters → Next + Back
+    if(i < letters.length - 1){ 
         let backBtn = document.createElement("button");
         backBtn.innerText = "Back ⬅️";
         backBtn.onclick = backToLetters;
@@ -178,11 +170,11 @@ function showLetter(i){
 
         let nextBtn = document.createElement("button");
         nextBtn.innerText = "Next ➡️";
-        nextBtn.onclick = ()=> showLetter(i+1); // next letter
+        nextBtn.onclick = ()=> showLetter(i+1); 
         btnContainer.appendChild(nextBtn);
-    } else { // last letter (4th)
+    } else { // Last letter → Next = main question
         let nextBtn = document.createElement("button");
-        nextBtn.innerText = "पुढे 💖"; // main question
+        nextBtn.innerText = "पुढे 💖"; 
         nextBtn.onclick = ()=> {
             document.getElementById("lettersSlide").style.display="none";
             document.getElementById("mainQuestion").style.display="block";
