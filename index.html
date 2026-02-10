@@ -28,6 +28,7 @@ button{
   color:white;
   cursor:pointer;
   margin:10px;
+  transition: transform 0.2s ease;
 }
 button:hover{background:#e83e8c;}
 button.disabled{
@@ -92,7 +93,7 @@ img{
 <div id="mainQuestion" style="display:none;">
   <h1>माझा Valentine होशील ना? 💝</h1>
   <button id="hoBtn">हो 😍</button>
-  <button class="disabled" id="nahiBtn">नाही 😜</button>
+  <button id="nahiBtn">नाही 😜</button>
 </div>
 
 <!-- Final Slide -->
@@ -118,7 +119,7 @@ img{
 
 <!-- Background music -->
 <iframe id="bgMusic" width="0" height="0"
-  src="https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=1&loop=1&playlist=7ctUrHGCsQU"
+  src="https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=0&loop=1&playlist=7ctUrHGCsQU"
   frameborder="0" allow="autoplay"></iframe>
 
 <script>
@@ -226,8 +227,14 @@ document.getElementById("hoBtn").onclick = () => {
   startHearts();
   startConfetti();
 };
+
 document.getElementById("nahiBtn").onclick = () => {
-  alert("Option नाही… 😜 फक्त हो करायचं आहे!");
+  // playful wobble animation
+  let btn = document.getElementById("nahiBtn");
+  btn.style.transform = "translateX(20px)";
+  setTimeout(()=> btn.style.transform = "translateX(-20px)", 100);
+  setTimeout(()=> btn.style.transform = "translateX(0px)", 200);
+  alert("Option नाही… फक्त हो करायचं आहे! 😘");
 }
 
 // Hearts animation
