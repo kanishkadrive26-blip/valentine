@@ -1,48 +1,51 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
 <title>प्रिय साहिल 💖</title>
-
 <style>
 body{
   margin:0;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(135deg,#ffe6f0,#fff);
+  font-family:'Georgia', serif;
   text-align:center;
+  background: linear-gradient(135deg,#ffe6f0,#fff);
   overflow-x:hidden;
 }
-section{
-  min-height:100vh;
-  display:none;
-  padding:40px 20px;
-}
-section.active{display:block;}
 h1{color:#d63384;}
-p{font-size:18px; line-height:1.8;}
+p{font-size:18px; line-height:1.6;}
+.centered-text{
+  margin:50px 20px;
+  font-size:20px;
+  line-height:1.8;
+}
 button{
   padding:12px 24px;
   font-size:18px;
-  background:#ff5fa2;
   border:none;
   border-radius:30px;
+  background:#ff5fa2;
   color:white;
   cursor:pointer;
   margin-top:30px;
 }
 button:hover{background:#e83e8c;}
-.heart{
-  position:fixed;
-  bottom:0;
-  font-size:20px;
-  animation:float 4s linear infinite;
+button.disabled{
+  background:#aaa;
+  cursor:not-allowed;
 }
-@keyframes float{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-100vh);opacity:0;}
+.letter{
+  font-size:50px;
+  cursor:pointer;
+  margin:20px;
+}
+.lock{
+  font-size:40px;
+  color:#444;
+  margin-left:10px;
 }
 .teddy{
   font-size:90px;
+  display:inline-block;
   animation:bounce 1.5s infinite;
 }
 @keyframes bounce{
@@ -54,109 +57,170 @@ img{
   border-radius:20px;
   margin-top:20px;
 }
+#heartContainer{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:999;
+}
 </style>
 </head>
-
 <body>
 
-<!-- SECTION 1 -->
-<section class="active">
-  <h1>नमस्कार प्रिय साहिल 💖</h1>
-  <p>
-    मी Kanishka…  
-    थोडी हट्टी, थोडी वेडी,  
-    पण पूर्णपणे तुझीच 😌  
-    <br><br>
-    आज इथे एक छोटासा खेळ आहे…  
-    <br>
-    <b>पण एक नियम आहे 😜</b><br>
-    पुढे जाताना हसायचंच आहे 💕
-  </p>
-  <button onclick="next()">पुढे चला 💌</button>
-</section>
+<!-- Intro Slide -->
+<div id="introSlide">
+  <div class="centered-text">
+    <p>प्रिय साहिल 😌💖<br>
+    मीच आहे तुझी कनिष्का —<br>
+    तुझ्या आयुष्यातली ती व्यक्ती<br>
+    जिचे संदेश वाचताना तुझ्या ओठांवर<br>
+    नकळत हसू येतं 😌💌</p>
 
-<!-- SECTION 2 -->
-<section>
-  <h1>💌 पहिलं पत्र</h1>
-  <p>
-    साहिल,<br>
-    तुझ्या साधेपणात मला घर सापडलं.  
-    तुझ्या बोलण्यात शांतता मिळाली.
-  </p>
-  <button onclick="next()">पुढचं 💖</button>
-</section>
+    <p>थोडंसं प्रेम आहे,<br>
+    थोडीशी मस्ती आहे,<br>
+    आणि आज तुझ्यासाठी<br>
+    मनापासूनचा एक छोटासा प्रश्न आहे 💖</p>
 
-<!-- SECTION 3 -->
-<section>
-  <h1>💌 दुसरं पत्र</h1>
-  <p>
-    तू माझा “चुहा” असलास तरी  
-    माझ्या हृदयाचा राजा आहेस 👑🐭  
-  </p>
-  <button onclick="next()">अजून आहे 😌</button>
-</section>
+    <button onclick="nextIntro()">हळूच पुढे जाऊया 😌💘</button>
+  </div>
+</div>
 
-<!-- SECTION 4 -->
-<section>
-  <h1>💌 तिसरं पत्र</h1>
-  <p>
-    माझ्या प्रत्येक वेडात  
-    तू साथ दिलीस…  
-    म्हणूनच तू खास आहेस 💞
-  </p>
-  <button onclick="next()">शेवटचं 💕</button>
-</section>
+<!-- Letters Slide -->
+<div id="lettersSlide" style="display:none;">
+  <h1>चार letters 💌</h1>
+  <div id="lettersDiv">
+    <span class="letter" id="l1">💌<span class="lock" id="lock1">🔒</span></span>
+    <span class="letter" id="l2">💌<span class="lock" id="lock2">🔒</span></span>
+    <span class="letter" id="l3">💌<span class="lock" id="lock3">🔒</span></span>
+    <span class="letter" id="l4">💌</span>
+  </div>
+  <div id="content"></div>
+</div>
 
-<!-- SECTION 5 -->
-<section>
-  <h1>साहिल… 💓</h1>
-  <p style="font-size:22px;">
-    <b>माझा Valentine होशील ना? 💝</b>
-  </p>
-  <button onclick="next()">होकार आहेच 😜</button>
-</section>
+<!-- Main Question Slide -->
+<div id="mainQuestion" style="display:none;">
+  <h1>माझा Valentine होशील ना? 💝</h1>
+  <button id="hoBtn">हो 😍</button>
+  <button class="disabled" id="nahiBtn">नाही 😜</button>
+</div>
 
-<!-- SECTION 6 -->
-<section>
+<!-- Final Slide -->
+<div id="finalSlide" style="display:none;">
   <h1>YAYYYY 🎉💖</h1>
-  <div class="teddy">🧸💋</div>
-  <p>
-    हा चुहा आता officially mine 😌💞
-  </p>
-  <button onclick="next()">आखरी surprise ✨</button>
-</section>
+  <div>
+    <span class="teddy">🧸</span>
+    <span class="teddy">🧸</span>
+  </div>
+  <p>हा चुहा आता officially mine 😌💞</p>
+  <img src="us.jpg" alt="आपली Photo">
+</div>
 
-<!-- SECTION 7 -->
-<section>
-  <h1>आपण ❤️</h1>
-  <p>(आपला फोटो इथे येईल 📸)</p>
-  <!-- later replace src -->
-  <!-- <img src="us.jpg"> -->
-  <p>
-    Forever starts here 💫  
-    <br>– Kanishka 💖
-  </p>
-</section>
+<div id="heartContainer"></div>
+
+<!-- Background music embed (hidden) -->
+<iframe id="bgMusic" width="0" height="0"
+  src="https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=0&loop=1&playlist=7ctUrHGCsQU"
+  frameborder="0" allow="autoplay"></iframe>
 
 <script>
-let sections=document.querySelectorAll("section");
-let i=0;
-function next(){
-  sections[i].classList.remove("active");
-  i++;
-  if(i<sections.length){
-    sections[i].classList.add("active");
+// Intro
+function nextIntro(){
+  document.getElementById("introSlide").style.display="none";
+  document.getElementById("lettersSlide").style.display="block";
+}
+
+// Letters content
+let letters = [
+`साहिल,<br>
+तू आयुष्यात आलास आणि सगळं थोडंसं बदललं.<br>
+काही गोष्टी अधिक हलक्या वाटू लागल्या,<br>
+आणि काही क्षण अधिक खास झाले 😌💖<br>
+तुझ्यासोबत असताना<br>
+मन आपोआप शांत होतं,<br>
+आणि नकळत चेहऱ्यावर हसू उमटतं.`,
+`साहिल,<br>
+तुझ्याशी बोलताना वेळ कसा जातो कळतच नाही.<br>
+‘आता थोडं थांबू’ असं ठरवलं तरी<br>
+संभाषण आपोआप पुढेच जात राहतं 😌💭<br>
+कधी कधी तर<br>
+फक्त तुझा एक साधा संदेशही<br>
+पूर्ण दिवस सुंदर करून जातो.`,
+`साहिल,<br>
+आपल्या साध्याशा गप्पांमधूनही<br>
+काहीतरी खास तयार होतं.<br>
+कधी विषय काहीच नसतो,<br>
+तरीही बोलायचं मन भरतच नाही 😌💬<br>
+आणि तुझे संदेश…<br>
+ते शब्द नसतात,<br>
+ते थेट मनापर्यंत पोहोचतात 💖`,
+`साहिल,<br>
+तुझ्यासोबत मी स्वतःसारखी असते —<br>
+कसलाही आव न आणता,<br>
+कसलाही मुखवटा न घालता.<br>
+तू समोर असताना<br>
+मनाला एक वेगळीच शांतता मिळते,<br>
+आणि तेच मला सगळ्यात जास्त प्रिय आहे ❤️`
+];
+
+let letterIndex = 0;
+let contentDiv = document.getElementById("content");
+
+function showLetter(i){
+  contentDiv.style.display="block";
+  contentDiv.innerHTML = `<p>${letters[i]}</p><button onclick="nextLetter()">Next ➡️</button>`;
+  document.getElementById("lettersDiv").style.display="none";
+}
+
+function nextLetter(){
+  letterIndex++;
+  if(letterIndex < letters.length){
+    contentDiv.innerHTML = `<p>${letters[letterIndex]}</p><button onclick="nextLetter()">Next ➡️</button>`;
+  }else{
+    contentDiv.style.display="none";
+    document.getElementById("mainQuestion").style.display="block";
   }
 }
-setInterval(()=>{
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*100+"vw";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),4000);
-},500);
-</script>
 
+// Attach letters click
+document.getElementById("l1").onclick = () => {showLetter(0)};
+document.getElementById("l2").onclick = () => {showLetter(1)};
+document.getElementById("l3").onclick = () => {showLetter(2)};
+document.getElementById("l4").onclick = () => {showLetter(3)};
+
+// Main question
+document.getElementById("hoBtn").onclick = () => {
+  document.getElementById("mainQuestion").style.display="none";
+  document.getElementById("finalSlide").style.display="block";
+  startHearts();
+  // Play music
+  document.getElementById("bgMusic").src = 
+    "https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=1&loop=1&playlist=7ctUrHGCsQU";
+};
+document.getElementById("nahiBtn").onclick = () => {
+  alert("Option नाही…  फक्त हो करायचं आहे!");
+}
+
+// Hearts animation
+function startHearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.style.position="fixed";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="100%";
+    h.style.fontSize=Math.random()*30+20+"px";
+    h.innerHTML="💖";
+    document.getElementById("heartContainer").appendChild(h);
+    let t=0;
+    let id=setInterval(()=>{
+      t+=2;
+      h.style.top = 100-t + "%";
+      if(t>120){ h.remove(); clearInterval(id);}
+    },50)
+  },300)
+}
+</script>
 </body>
 </html>
