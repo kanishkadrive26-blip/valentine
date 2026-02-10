@@ -100,24 +100,24 @@ img{
   <h1>YAYYYY 🎉💖</h1>
 
   <!-- Teddy Kiss GIF -->
-  <img src="https://media.giphy.com/media/p3nDRuY3BJb8gPFmdQ/giphy.gif" 
+  <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyZzQyZHNhNm94bDI3ZGpwdHF4YzM2cDM5MDZyeXdodGh6MDRvYmExZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MfhUoRSp05AxeSIoSW/giphy.gif" 
        alt="Teddy Kiss Animation" 
        style="width:250px; margin-top:20px; display:block; margin-left:auto; margin-right:auto;">
 
   <p>हा चुहा आता officially mine 😌💞</p>
 
-  <!-- Your Photo with fade-in & zoom effect -->
+  <!-- Your Photo -->
   <img id="finalPhoto" 
        src="https://drive.google.com/uc?export=view&id=1QGe_Q1Rf47yL3SH1egS06vn0A1axaONV" 
        alt="आपली Photo" 
-       style="opacity:0; transform:scale(0.8); transition:1.2s ease-in-out; margin-top:20px;">
+       style="opacity:1; transform:scale(1); transition:1.2s ease-in-out; margin-top:20px;">
 </div>
 
 <div id="heartContainer"></div>
 
-<!-- Background music embed (hidden) -->
+<!-- Background music -->
 <iframe id="bgMusic" width="0" height="0"
-  src="https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=0&loop=1&playlist=7ctUrHGCsQU"
+  src="https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=1&loop=1&playlist=7ctUrHGCsQU"
   frameborder="0" allow="autoplay"></iframe>
 
 <script>
@@ -140,7 +140,7 @@ let contentDiv = document.getElementById("content");
 
 // Typing animation
 function typeText(text, callback){
-  contentDiv.innerHTML = ""; // innerHTML ensures <br> works
+  contentDiv.innerHTML = "";
   let i=0;
   function type(){
     if(i < text.length){
@@ -161,7 +161,6 @@ function showLetter(i){
   typeText(letters[i], ()=>{
     let btnContainer = document.createElement("div");
 
-    // First 3 letters → Next + Back
     if(i < letters.length - 1){ 
         let backBtn = document.createElement("button");
         backBtn.innerText = "Back ⬅️";
@@ -172,7 +171,7 @@ function showLetter(i){
         nextBtn.innerText = "Next ➡️";
         nextBtn.onclick = ()=> showLetter(i+1); 
         btnContainer.appendChild(nextBtn);
-    } else { // Last letter → Next = main question
+    } else {
         let nextBtn = document.createElement("button");
         nextBtn.innerText = "पुढे 💖"; 
         nextBtn.onclick = ()=> {
@@ -197,7 +196,7 @@ function backToLetters(){
   document.getElementById("lettersDiv").style.display="block";
 }
 
-// Attach letters click
+// Letters click
 document.getElementById("l1").onclick = ()=> showLetter(0);
 document.getElementById("l2").onclick = ()=> showLetter(1);
 document.getElementById("l3").onclick = ()=> showLetter(2);
@@ -209,19 +208,8 @@ document.getElementById("hoBtn").onclick = () => {
   document.getElementById("mainQuestion").style.display="none";
   document.getElementById("finalSlide").style.display="block";
 
-  // Photo fade-in + zoom
-  let img = document.getElementById("finalPhoto");
-  setTimeout(()=>{
-    img.style.opacity=1; 
-    img.style.transform="scale(1)";
-  }, 200);
-
   // Hearts animation
   startHearts();
-
-  // Music
-  document.getElementById("bgMusic").src =
-  "https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=1&loop=1&playlist=7ctUrHGCsQU";
 };
 document.getElementById("nahiBtn").onclick = () => {
   alert("Option नाही… 😜 फक्त हो करायचं आहे!");
