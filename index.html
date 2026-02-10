@@ -2,14 +2,161 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<title>प्रिय साहिल ❤️</title>
+<title>प्रिय साहिल 💖</title>
+
+<style>
+body{
+  margin:0;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(135deg,#ffe6f0,#fff);
+  text-align:center;
+  overflow-x:hidden;
+}
+section{
+  min-height:100vh;
+  display:none;
+  padding:40px 20px;
+}
+section.active{display:block;}
+h1{color:#d63384;}
+p{font-size:18px; line-height:1.8;}
+button{
+  padding:12px 24px;
+  font-size:18px;
+  background:#ff5fa2;
+  border:none;
+  border-radius:30px;
+  color:white;
+  cursor:pointer;
+  margin-top:30px;
+}
+button:hover{background:#e83e8c;}
+.heart{
+  position:fixed;
+  bottom:0;
+  font-size:20px;
+  animation:float 4s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-100vh);opacity:0;}
+}
+.teddy{
+  font-size:90px;
+  animation:bounce 1.5s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+img{
+  max-width:80%;
+  border-radius:20px;
+  margin-top:20px;
+}
+</style>
 </head>
-<body style="background:#fff0f5; text-align:center; font-family:serif;">
-<h1>नमस्कार प्रिय साहिल 💖</h1>
-<p>
-मी Kanishka —  
-थोडी हट्टी, थोडी वेडी,  
-पण पूर्णपणे तुझीच 😌
-</p>
+
+<body>
+
+<!-- SECTION 1 -->
+<section class="active">
+  <h1>नमस्कार प्रिय साहिल 💖</h1>
+  <p>
+    मी Kanishka…  
+    थोडी हट्टी, थोडी वेडी,  
+    पण पूर्णपणे तुझीच 😌  
+    <br><br>
+    आज इथे एक छोटासा खेळ आहे…  
+    <br>
+    <b>पण एक नियम आहे 😜</b><br>
+    पुढे जाताना हसायचंच आहे 💕
+  </p>
+  <button onclick="next()">पुढे चला 💌</button>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+  <h1>💌 पहिलं पत्र</h1>
+  <p>
+    साहिल,<br>
+    तुझ्या साधेपणात मला घर सापडलं.  
+    तुझ्या बोलण्यात शांतता मिळाली.
+  </p>
+  <button onclick="next()">पुढचं 💖</button>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+  <h1>💌 दुसरं पत्र</h1>
+  <p>
+    तू माझा “चुहा” असलास तरी  
+    माझ्या हृदयाचा राजा आहेस 👑🐭  
+  </p>
+  <button onclick="next()">अजून आहे 😌</button>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+  <h1>💌 तिसरं पत्र</h1>
+  <p>
+    माझ्या प्रत्येक वेडात  
+    तू साथ दिलीस…  
+    म्हणूनच तू खास आहेस 💞
+  </p>
+  <button onclick="next()">शेवटचं 💕</button>
+</section>
+
+<!-- SECTION 5 -->
+<section>
+  <h1>साहिल… 💓</h1>
+  <p style="font-size:22px;">
+    <b>माझा Valentine होशील ना? 💝</b>
+  </p>
+  <button onclick="next()">होकार आहेच 😜</button>
+</section>
+
+<!-- SECTION 6 -->
+<section>
+  <h1>YAYYYY 🎉💖</h1>
+  <div class="teddy">🧸💋</div>
+  <p>
+    हा चुहा आता officially mine 😌💞
+  </p>
+  <button onclick="next()">आखरी surprise ✨</button>
+</section>
+
+<!-- SECTION 7 -->
+<section>
+  <h1>आपण ❤️</h1>
+  <p>(आपला फोटो इथे येईल 📸)</p>
+  <!-- later replace src -->
+  <!-- <img src="us.jpg"> -->
+  <p>
+    Forever starts here 💫  
+    <br>– Kanishka 💖
+  </p>
+</section>
+
+<script>
+let sections=document.querySelectorAll("section");
+let i=0;
+function next(){
+  sections[i].classList.remove("active");
+  i++;
+  if(i<sections.length){
+    sections[i].classList.add("active");
+  }
+}
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+},500);
+</script>
+
 </body>
 </html>
