@@ -28,13 +28,9 @@ button{
   color:white;
   cursor:pointer;
   margin:10px;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s;
 }
 button:hover{background:#e83e8c;}
-button.disabled{
-  background:#aaa;
-  cursor:not-allowed;
-}
 .letter{
   font-size:50px;
   cursor:pointer;
@@ -47,6 +43,15 @@ img{
   opacity:0;
   transform: scale(0.8);
   transition: all 1.2s ease-in-out;
+}
+.sparkle{
+  display:inline-block;
+  color: #ff69b4;
+  animation: sparkle 1s infinite;
+}
+@keyframes sparkle{
+  0%,100%{text-shadow:0 0 2px #fff,0 0 5px #ff69b4,0 0 10px #ff1493;}
+  50%{text-shadow:0 0 5px #fff,0 0 10px #ff69b4,0 0 15px #ff1493;}
 }
 #heartContainer, #confettiContainer{
   position:fixed;
@@ -154,13 +159,16 @@ let letters = [
 let currentLetter = 0;
 let contentDiv = document.getElementById("content");
 
-// Typing animation
+// Typing animation with sparkle
 function typeText(text, callback){
-  contentDiv.innerText = "";
+  contentDiv.innerHTML = "";
   let i=0;
   function type(){
     if(i < text.length){
-      contentDiv.innerText += text.charAt(i);
+      let span = document.createElement("span");
+      span.className="sparkle";
+      span.innerText = text.charAt(i);
+      contentDiv.appendChild(span);
       i++;
       setTimeout(type,40);
     } else {
@@ -208,7 +216,7 @@ function showLetter(i){
 }
 
 function backToLetters(){
-  contentDiv.innerText="";
+  contentDiv.innerHTML="";
   document.getElementById("lettersDiv").style.display="block";
 }
 
@@ -228,8 +236,8 @@ document.getElementById("hoBtn").onclick = () => {
   startConfetti();
 };
 
+// Nahi button playful wobble
 document.getElementById("nahiBtn").onclick = () => {
-  // playful wobble animation
   let btn = document.getElementById("nahiBtn");
   btn.style.transform = "translateX(20px)";
   setTimeout(()=> btn.style.transform = "translateX(-20px)", 100);
