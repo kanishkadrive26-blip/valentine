@@ -1,288 +1,87 @@
 <!DOCTYPE html>
-<html lang="mr">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>प्रिय साहिल 💖</title>
+<title>For Sahil ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
-  margin:0;
-  font-family:'Georgia', serif;
-  text-align:center;
-  background: linear-gradient(135deg,#ffe6f0,#fff);
-  overflow-x:hidden;
+margin:0;
+background:#ff5f7e;
+font-family:cursive;
+color:white;
+text-align:center;
+overflow:hidden;
 }
-h1{color:#d63384; font-size:2em;}
-p{font-size:1.1em; line-height:1.8; white-space: pre-line;}
-.centered-text{
-  margin:40px 15px;
-  font-size:1.1em;
-  line-height:1.8;
-}
+.screen{display:none;min-height:100vh;padding:30px}
+.active{display:block}
 button{
-  padding:12px 24px;
-  font-size:1em;
-  border:none;
-  border-radius:30px;
-  background:#ff5fa2;
-  color:white;
-  cursor:pointer;
-  margin:10px;
-  transition: transform 0.2s ease, background 0.2s;
+padding:12px 25px;
+border:none;
+border-radius:30px;
+font-size:16px;
+margin:10px;
 }
-button:hover{background:#e83e8c;}
-.letter{
-  font-size:50px;
-  cursor:pointer;
-  margin:20px;
-}
-img{
-  max-width:90%;
-  border-radius:20px;
-  margin-top:20px;
-  opacity:0;
-  transform: scale(0.8);
-  transition: all 1.2s ease-in-out;
-}
-.sparkle{
-  display:inline-block;
-  color: #ff69b4;
-  animation: sparkle 1s infinite;
-}
-@keyframes sparkle{
-  0%,100%{text-shadow:0 0 2px #fff,0 0 5px #ff69b4,0 0 10px #ff1493;}
-  50%{text-shadow:0 0 5px #fff,0 0 10px #ff69b4,0 0 15px #ff1493;}
-}
-#heartContainer, #confettiContainer{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  pointer-events:none;
-  z-index:999;
-}
+.box{font-size:40px;cursor:pointer;margin:10px}
+img{width:80%;border-radius:20px;margin-top:20px}
 </style>
 </head>
+
 <body>
 
-<!-- Intro Slide -->
-<div id="introSlide">
-  <div class="centered-text">
-    <p>प्रिय साहिल 😌💖  
-मीच आहे तुझी कनिष्का —  
-तुझ्या आयुष्यातली ती व्यक्ती  
-जिचे संदेश वाचताना तुझ्या ओठांवर  
-नकळत हसू येतं 😌💌</p>
-
-    <p>थोडंसं प्रेम आहे,  
-थोडीशी मस्ती आहे,  
-आणि आज तुझ्यासाठी  
-मनापासूनचा एक छोटासा प्रश्न आहे 💖</p>
-
-    <button onclick="nextIntro()">हळूच पुढे जाऊया 😌💘</button>
-  </div>
+<div id="intro" class="screen active">
+<h1>Hey Sahil 💌</h1>
+<p>I made something special for you</p>
+<button onclick="go(1)">Start 💖</button>
 </div>
 
-<!-- Letters Slide -->
-<div id="lettersSlide" style="display:none;">
-  <h1>चार letters 💌</h1>
-  <div id="lettersDiv">
-    <span class="letter" id="l1">💌</span>
-    <span class="letter" id="l2">💌</span>
-    <span class="letter" id="l3">💌</span>
-    <span class="letter" id="l4">💌</span>
-  </div>
-  <div id="content" style="margin-top:30px; white-space: pre-line;"></div>
+<div id="letters" class="screen">
+<h2>Four Letters For You 💝</h2>
+<div>
+<span class="box" onclick="openL(0)">🔒</span>
+<span class="box" onclick="openL(1)">🔒</span>
+<span class="box" onclick="openL(2)">🔒</span>
+<span class="box" onclick="openL(3)">🔒</span>
+</div>
 </div>
 
-<!-- Main Question Slide -->
-<div id="mainQuestion" style="display:none;">
-  <h1>माझा Valentine होशील ना? 💝</h1>
-  <button id="hoBtn">हो 😍</button>
-  <button id="nahiBtn">नाही 😜</button>
+<div id="msg" class="screen">
+<h2 id="text"></h2>
+<button onclick="go(2)">Back 💗</button>
 </div>
 
-<!-- Final Slide -->
-<div id="finalSlide" style="display:none; text-align:center;">
-  <h1>YAYYYY 🎉💖</h1>
-
-  <!-- Teddy Kiss GIF -->
-  <img src="https://media.giphy.com/media/p3nDRuY3BJb8gPFmdQ/giphy.gif" 
-       alt="Teddy Kiss Animation" 
-       style="width:250px; margin-top:20px; display:block; margin-left:auto; margin-right:auto; opacity:1; transform:scale(1);">
-
-  <p>हा चुहा आता officially mine 😌💞</p>
-
-  <!-- Your Photo -->
-  <img id="finalPhoto" 
-       src="https://drive.google.com/uc?export=view&id=1QGe_Q1Rf47yL3SH1egS06vn0A1axaONV" 
-       alt="आपली Photo" 
-       style="opacity:1; transform:scale(1); transition:1.2s ease-in-out; margin-top:20px;">
+<div id="question" class="screen">
+<h2>Will you be my Valentine? 💘</h2>
+<button onclick="yes()">YES ❤️</button>
+<button onclick="alert('No is not allowed 😤')">NO</button>
 </div>
 
-<div id="heartContainer"></div>
-<div id="confettiContainer"></div>
-
-<!-- Background music -->
-<iframe id="bgMusic" width="0" height="0"
-  src="https://www.youtube.com/embed/7ctUrHGCsQU?autoplay=1&loop=1&playlist=7ctUrHGCsQU"
-  frameborder="0" allow="autoplay; encrypted-media"></iframe>
+<div id="final" class="screen">
+<h2>I Love You Sahil 💞</h2>
+<img src="https://drive.google.com/uc?export=view&id=1QGe_Q1Rf47yL3SH1egS06vn0A1axaONV">
+<audio id="song" autoplay>
+<source src="https://drive.google.com/uc?export=view&id=1N4v1qXSc0IUCVJImAiseY7O93US-8Q6K">
+</audio>
+</div>
 
 <script>
-// Intro
-function nextIntro(){
-  document.getElementById("introSlide").style.display="none";
-  document.getElementById("lettersSlide").style.display="block";
+let screens=document.querySelectorAll('.screen');
+function go(n){
+screens.forEach(s=>s.classList.remove('active'));
+screens[n].classList.add('active');
 }
-
-// Letters content
-let letters = [
-`साहिल,  
-तू आयुष्यात आलास आणि सगळं थोडंसं बदललं.  
-काही गोष्टी अधिक हलक्या वाटू लागल्या,  
-आणि काही क्षण अधिक खास झाले 😌💖  
-तुझ्यासोबत असताना मन आपोआप शांत होतं,  
-आणि नकळत चेहऱ्यावर हसू उमटतं.`,
-`साहिल,  
-तुझ्याशी बोलताना वेळ कसा जातो कळतच नाही.  
-‘आता थोडं थांबू’ असं ठरवलं तरी संभाषण आपोआप पुढेच जात राहतं 😌💭  
-कधी कधी तर फक्त तुझा एक साधा संदेशही पूर्ण दिवस सुंदर करून जातो.`,
-`साहिल,  
-आपल्या साध्याशा गप्पांमधूनही काहीतरी खास तयार होतं.  
-कधी विषय काहीच नसतो, तरीही बोलायचं मन भरतच नाही 😌💬  
-आणि तुझे संदेश… ते शब्द नसतात, ते थेट मनापर्यंत पोहोचतात 💖`,
-`साहिल,  
-तुझ्यासोबत मी स्वतःसारखी असते — कसलाही आव न आणता, कसलाही मुखवटा न घालता.  
-तू समोर असताना मनाला एक वेगळीच शांतता मिळते,  
-आणि तेच मला सगळ्यात जास्त प्रिय आहे ❤️`
+let msgs=[
+"You make my world brighter 🌟",
+"I smile because of you 😊",
+"My heart chooses you ❤️",
+"Always you, Sahil 💕"
 ];
-
-let currentLetter = 0;
-let contentDiv = document.getElementById("content");
-
-// Typing animation with sparkle
-function typeText(text, callback){
-  contentDiv.innerHTML = "";
-  let i=0;
-  function type(){
-    if(i < text.length){
-      let span = document.createElement("span");
-      span.className="sparkle";
-      span.innerText = text.charAt(i);
-      contentDiv.appendChild(span);
-      i++;
-      setTimeout(type,40);
-    } else {
-      if(callback) callback();
-    }
-  }
-  type();
+function openL(i){
+document.getElementById('text').innerText=msgs[i];
+go(2);
 }
-
-// Show letter with typing + back + next logic
-function showLetter(i){
-  currentLetter = i;
-  document.getElementById("lettersDiv").style.display="none";
-  typeText(letters[i], ()=>{
-    let btnContainer = document.createElement("div");
-
-    if(i < letters.length - 1){ 
-        let backBtn = document.createElement("button");
-        backBtn.innerText = "Back ⬅️";
-        backBtn.onclick = backToLetters;
-        btnContainer.appendChild(backBtn);
-
-        let nextBtn = document.createElement("button");
-        nextBtn.innerText = "Next ➡️";
-        nextBtn.onclick = ()=> showLetter(i+1); 
-        btnContainer.appendChild(nextBtn);
-    } else {
-        let nextBtn = document.createElement("button");
-        nextBtn.innerText = "पुढे 💖"; 
-        nextBtn.onclick = ()=> {
-            document.getElementById("lettersSlide").style.display="none";
-            document.getElementById("mainQuestion").style.display="block";
-        };
-        btnContainer.appendChild(nextBtn);
-
-        let backBtn = document.createElement("button");
-        backBtn.innerText = "Back ⬅️";
-        backBtn.onclick = backToLetters;
-        btnContainer.appendChild(backBtn);
-    }
-
-    contentDiv.appendChild(document.createElement("br"));
-    contentDiv.appendChild(btnContainer);
-  });
-}
-
-function backToLetters(){
-  contentDiv.innerHTML="";
-  document.getElementById("lettersDiv").style.display="block";
-}
-
-// Letters click
-document.getElementById("l1").onclick = ()=> showLetter(0);
-document.getElementById("l2").onclick = ()=> showLetter(1);
-document.getElementById("l3").onclick = ()=> showLetter(2);
-document.getElementById("l4").onclick = ()=> showLetter(3);
-
-// Main question
-document.getElementById("hoBtn").onclick = () => {
-  document.getElementById("lettersSlide").style.display="none";
-  document.getElementById("mainQuestion").style.display="none";
-  document.getElementById("finalSlide").style.display="block";
-
-  startHearts();
-  startConfetti();
-};
-
-// Nahi button playful wobble
-document.getElementById("nahiBtn").onclick = () => {
-  let btn = document.getElementById("nahiBtn");
-  btn.style.transform = "translateX(20px)";
-  setTimeout(()=> btn.style.transform = "translateX(-20px)", 100);
-  setTimeout(()=> btn.style.transform = "translateX(0px)", 200);
-  alert("Option नाही… फक्त हो करायचं आहे! 😘");
-}
-
-// Hearts animation
-function startHearts(){
-  setInterval(()=>{
-    let h=document.createElement("div");
-    h.style.position="fixed";
-    h.style.left=Math.random()*100+"vw";
-    h.style.top="100%";
-    h.style.fontSize=Math.random()*30+20+"px";
-    h.innerHTML="💖";
-    document.getElementById("heartContainer").appendChild(h);
-    let t=0;
-    let id=setInterval(()=>{
-      t+=2;
-      h.style.top = 100-t + "%";
-      if(t>120){ h.remove(); clearInterval(id);}
-    },20);
-  },300);
-}
-
-// Confetti animation
-function startConfetti(){
-  setInterval(()=>{
-    let c=document.createElement("div");
-    c.style.position="fixed";
-    c.style.left=Math.random()*100+"vw";
-    c.style.top="-10px";
-    c.style.fontSize=(Math.random()*20+10)+"px";
-    let confettis=["🎉","✨","💫","💖"];
-    c.innerHTML=confettis[Math.floor(Math.random()*confettis.length)];
-    document.getElementById("confettiContainer").appendChild(c);
-    let t=0;
-    let id=setInterval(()=>{
-      t+=2;
-      c.style.top = t + "%";
-      if(t>120){ c.remove(); clearInterval(id);}
-    },20);
-  },150);
-}
+function yes(){go(4);}
 </script>
+
 </body>
 </html>
